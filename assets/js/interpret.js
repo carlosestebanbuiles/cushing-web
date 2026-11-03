@@ -1,5 +1,5 @@
 import { interpretScreening, interpretActh, interpretOrigin, interpretPostop } from "../../src/logic/interpretation.js";
-import { REFERENCES } from "../../src/logic/criteria.js";
+import { REFERENCES, refUrl } from "../../src/logic/criteria.js";
 import { convert, timesULN, fmt } from "../../src/logic/units.js";
 import { t } from "../../src/logic/messages.js";
 import { getLang } from "./site.js";
@@ -15,7 +15,7 @@ let state = null;
 
 function refsHtml(refs = []) {
   if (!refs.length) return "";
-  return `<span class="refs">${refs.map((r) => `<a href="https://doi.org/${REFERENCES[r].doi}">${REFERENCES[r].short}</a>`).join(" · ")}</span>`;
+  return `<span class="refs">${refs.map((r) => `<a href="${refUrl(REFERENCES[r])}">${REFERENCES[r].short}</a>`).join(" · ")}</span>`;
 }
 function finding(level, text, refs) {
   return `<div class="finding ${level}"><span class="dot"></span><div>${text}${refsHtml(refs)}</div></div>`;

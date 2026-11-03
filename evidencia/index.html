@@ -109,6 +109,7 @@
             <table>
               <thead><tr><th><span lang="es">Versión</span><span lang="en">Version</span></th><th><span lang="es">Fecha</span><span lang="en">Date</span></th><th><span lang="es">Cambios</span><span lang="en">Changes</span></th></tr></thead>
               <tbody>
+                <tr><td>0.2</td><td>2026-11</td><td><span lang="es">Herramienta de interpretación del cateterismo de senos petrosos, basada en la hoja del grupo con fórmulas corregidas (relación normalizada y gradiente intersinusal). Demo de pacientes.</span><span lang="en">Petrosal sinus sampling interpretation tool, based on the group's spreadsheet with corrected formulas (normalized ratio and intersinus gradient). Patient demo.</span></td></tr>
                 <tr><td>0.1</td><td>2026-11</td><td><span lang="es">Primera versión web: modelo de origen ectópico (4 variables), interpretación integrada, conversor de unidades.</span><span lang="en">First web version: ectopic origin model (4 variables), integrated interpretation, unit converter.</span></td></tr>
                 <tr><td>—</td><td>2025-07</td><td><span lang="es">Herramienta original en Shiny (cushing-predictor).</span><span lang="en">Original Shiny tool (cushing-predictor).</span></td></tr>
               </tbody>
@@ -129,7 +130,7 @@
   <div id="site-footer"></div>
   <script type="module" src="../assets/js/site.js"></script>
   <script type="module">
-    import { CRITERIA, REFERENCES } from "../src/logic/criteria.js";
+    import { CRITERIA, REFERENCES, refUrl } from "../src/logic/criteria.js";
     import { getLang } from "../assets/js/site.js";
     const ROWS = [
       ["dst1mg", "Cortisol tras 1 mg de dexametasona", "Cortisol after 1 mg dexamethasone", (c) => `> ${c.abnormalAbove_ugdl} µg/dL (50 nmol/L)`],
@@ -140,6 +141,9 @@
       ["hddst", "Dexametasona dosis altas", "High-dose dexamethasone", (c) => `> ${c.suppressionPct}%`],
       ["mri", "RM hipofisaria", "Pituitary MRI", (c) => `< ${c.smallBelow_mm} · ${c.smallBelow_mm}–9 · ≥ ${c.macroadenomaFrom_mm} mm`],
       ["ipss", "Cateterismo de senos petrosos", "Petrosal sinus sampling", (c) => `≥ ${c.basalRatio} basal · ≥ ${c.stimulatedRatio}`],
+      ["ipssProlactin", "Cateterismo: prolactina IPS:P basal", "Sampling: basal prolactin IPS:P", (c, es) => `≥ ${c.successFrom} ${es ? "adecuada" : "adequate"} · < ${c.failBelow} ${es ? "fallida" : "failed"}`],
+      ["ipssNormalized", "Cateterismo: ACTH normalizada por prolactina", "Sampling: prolactin-normalized ACTH", (c, es) => `≥ ${c.cdFrom} EC/CD · ≤ ${c.easAtMost} ${es ? "ectópico" : "ectopic"}`],
+      ["ipssLateralization", "Cateterismo: gradiente intersinusal", "Sampling: intersinus gradient", (c) => `≥ ${c.intersinusFrom}`],
       ["remission", "Cortisol posoperatorio", "Postoperative cortisol", (c) => `< ${c.cortisolBelow_ugdl} µg/dL (55 nmol/L)`],
       ["ectopicBands", "Modelo de origen ectópico", "Ectopic origin model", (c) => `${c.low * 100}% · ${c.high * 100}%`],
     ];
@@ -150,9 +154,9 @@
         ROWS.map(([k, e, n, fn]) => {
           const c = CRITERIA[k];
           const st = c.status === "verified" ? `<span class="tag ok">${es ? "Verificado" : "Verified"}</span>` : `<span class="tag review">${es ? "En revisión" : "Under review"}</span>`;
-          return `<tr><td>${es ? e : n}</td><td class="mono">${fn(c)}</td><td>${c.refs.map((r) => `<a href="https://doi.org/${REFERENCES[r].doi}">${REFERENCES[r].short}</a>`).join(", ")}</td><td>${st}</td></tr>`;
+          return `<tr><td>${es ? e : n}</td><td class="mono">${fn(c, es)}</td><td>${c.refs.map((r) => `<a href="${refUrl(REFERENCES[r])}">${REFERENCES[r].short}</a>`).join(", ")}</td><td>${st}</td></tr>`;
         }).join("") + "</tbody>";
-      document.getElementById("ref-list").innerHTML = Object.values(REFERENCES).map((r) => `<li>${r.full} <a href="https://doi.org/${r.doi}">doi:${r.doi}</a></li>`).join("");
+      document.getElementById("ref-list").innerHTML = Object.values(REFERENCES).map((r) => `<li>${r.full} <a href="${refUrl(r)}">${r.doi ? "doi:" + r.doi : "PubMed"}</a></li>`).join("");
     }
     render();
     document.addEventListener("langchange", render);
