@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evidencia · Cushing</title>
+  <meta name="title-es" content="Evidencia · Cushing">
+  <meta name="title-en" content="Evidence · Cushing">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body data-root="../" data-page="evidence">
+  <div id="site-header"></div>
+  <main id="main">
+    <div class="container page-head">
+      <div class="crumbs"><a href="../"><span lang="es">Inicio</span><span lang="en">Home</span></a> › <span><span lang="es">Evidencia</span><span lang="en">Evidence</span></span></div>
+      <h1><span lang="es">El modelo, con transparencia</span><span lang="en">The model, transparently</span></h1>
+      <p class="lead"><span lang="es">Todo lo necesario para evaluar y reproducir los cálculos: población, ecuación, desempeño, limitaciones y los puntos de corte usados por cada herramienta.</span><span lang="en">Everything needed to assess and reproduce the calculations: population, equation, performance, limitations and the cutoffs used by every tool.</span></p>
+    </div>
+
+    <div class="container with-side">
+      <aside class="side">
+        <nav aria-label="Secciones">
+          <a href="#poblacion" class="active"><span lang="es">Población y aplicabilidad</span><span lang="en">Population and applicability</span></a>
+          <a href="#ecuacion"><span lang="es">Ecuación y variables</span><span lang="en">Equation and variables</span></a>
+          <a href="#validacion"><span lang="es">Validación y limitaciones</span><span lang="en">Validation and limitations</span></a>
+          <a href="#criterios"><span lang="es">Criterios de interpretación</span><span lang="en">Interpretation criteria</span></a>
+          <a href="#versiones"><span lang="es">Historial de versiones</span><span lang="en">Version history</span></a>
+          <a href="#citar"><span lang="es">Cómo citar</span><span lang="en">How to cite</span></a>
+        </nav>
+      </aside>
+      <div>
+        <section class="card tool-section" id="poblacion">
+          <div class="head"><span class="icon-bubble"><span data-icon="users"></span></span><h2><span lang="es">Población y aplicabilidad</span><span lang="en">Population and applicability</span></h2></div>
+          <div class="grid grid-2">
+            <div class="card tint-blue" style="box-shadow:none">
+              <h4><span lang="es">Desarrollo · España</span><span lang="en">Development · Spain</span></h4>
+              <p class="small" style="margin:0"><span lang="es">253 pacientes consecutivos con síndrome de Cushing ACTH-dependiente de 26 hospitales terciarios: 199 con enfermedad de Cushing y 54 con secreción ectópica (21,3 %).</span><span lang="en">253 consecutive patients with ACTH-dependent Cushing's syndrome from 26 tertiary hospitals: 199 with Cushing's disease and 54 with ectopic secretion (21.3%).</span></p>
+            </div>
+            <div class="card tint-green" style="box-shadow:none">
+              <h4><span lang="es">Validación externa · Colombia</span><span lang="en">External validation · Colombia</span></h4>
+              <p class="small" style="margin:0"><span lang="es">159 pacientes: 129 con enfermedad de Cushing y 30 con secreción ectópica (18,9 %).</span><span lang="en">159 patients: 129 with Cushing's disease and 30 with ectopic secretion (18.9%).</span></p>
+            </div>
+          </div>
+          <p style="margin-top:16px"><span lang="es"><strong>Aplicable a:</strong> adultos con hipercortisolismo endógeno confirmado, ACTH-dependiente, en el momento de duda sobre el origen. <strong>No aplicable a:</strong> niños, hipercortisolismo ACTH-independiente, pacientes en tratamiento que normalice el cortisol.</span><span lang="en"><strong>Applies to:</strong> adults with confirmed, ACTH-dependent endogenous hypercortisolism, at the point of uncertainty about the source. <strong>Does not apply to:</strong> children, ACTH-independent hypercortisolism, patients on treatment that normalizes cortisol.</span></p>
+        </section>
+
+        <section class="card tool-section" id="ecuacion">
+          <div class="head"><span class="icon-bubble"><span data-icon="calculator"></span></span><h2><span lang="es">Ecuación y variables</span><span lang="en">Equation and variables</span></h2></div>
+          <p><span lang="es">Regresión logística con selección penalizada (LASSO) e imputación múltiple. Modelo reducido de cuatro variables:</span><span lang="en">Logistic regression with penalized selection (LASSO) and multiple imputation. Reduced four-variable model:</span></p>
+          <div class="equation">
+            <span lang="es">lp = −5,14695 + 3,09100·ln(ACTH + 1) − 0,03174·ln(CLU×LSN + 1) − 2,57720·K − 0,36924·D<br></span><span lang="en">lp = −5.14695 + 3.09100·ln(ACTH + 1) − 0.03174·ln(UFC×ULN + 1) − 2.57720·K − 0.36924·D<br></span>
+            P(<span lang="es">ectópico</span><span lang="en">ectopic</span>) = 1 / (1 + e<sup>−lp</sup>)
+          </div>
+          <div class="table-wrap" style="margin-top:16px">
+            <table>
+              <thead><tr><th><span lang="es">Variable</span><span lang="en">Variable</span></th><th><span lang="es">Unidad</span><span lang="en">Unit</span></th><th class="num"><span lang="es">Coeficiente</span><span lang="en">Coefficient</span></th><th><span lang="es">Efecto</span><span lang="en">Effect</span></th></tr></thead>
+              <tbody>
+                <tr><td><span lang="es">Intercepto</span><span lang="en">Intercept</span></td><td>—</td><td class="num">−5.14695331</td><td>—</td></tr>
+                <tr><td>ACTH</td><td>pg/mL, ln(x+1)</td><td class="num">3.09100154</td><td><span lang="es">↑ probabilidad ectópica</span><span lang="en">↑ ectopic probability</span></td></tr>
+                <tr><td><span lang="es">CLU 24 h</span><span lang="en">24-h UFC</span></td><td>×LSN, ln(x+1)</td><td class="num">−0.03173828</td><td><span lang="es">Efecto pequeño</span><span lang="en">Small effect</span></td></tr>
+                <tr><td><span lang="es">Potasio nadir (K)</span><span lang="en">Nadir potassium (K)</span></td><td>mmol/L</td><td class="num">−2.57720234</td><td><span lang="es">↓ probabilidad ectópica</span><span lang="en">↓ ectopic probability</span></td></tr>
+                <tr><td><span lang="es">Diámetro de lesión hipofisaria (D)</span><span lang="en">Pituitary lesion diameter (D)</span></td><td>mm</td><td class="num">−0.36923825</td><td><span lang="es">↓ probabilidad ectópica</span><span lang="en">↓ ectopic probability</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="notice info" style="margin-top:16px"><span data-icon="info"></span><p><span lang="es">La transformación logarítmica implementada es ln(x + 1), igual que en la herramienta original en R (<a href="https://github.com/carlosestebanbuiles/cushing-predictor">cushing-predictor</a>). Los resultados de esta web coinciden con esa implementación (pruebas automáticas en el repositorio).</span><span lang="en">The implemented log transformation is ln(x + 1), as in the original R tool (<a href="https://github.com/carlosestebanbuiles/cushing-predictor">cushing-predictor</a>). This site's results match that implementation (automated tests in the repository).</span></p></div>
+        </section>
+
+        <section class="card tool-section" id="validacion">
+          <div class="head"><span class="icon-bubble green"><span data-icon="shield"></span></span><h2><span lang="es">Validación y limitaciones</span><span lang="en">Validation and limitations</span></h2></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th></th><th><span lang="es">Desarrollo</span><span lang="en">Development</span></th><th><span lang="es">Validación externa</span><span lang="en">External validation</span></th></tr></thead>
+              <tbody>
+                <tr><td>AUC</td><td><span lang="es">0,987 (media de 5 imputaciones)</span><span lang="en">0.987 (mean of 5 imputations)</span></td><td>0,9885–0,9890</td></tr>
+                <tr><td><span lang="es">Calibración (intercepto / pendiente)</span><span lang="en">Calibration (intercept / slope)</span></td><td><span lang="es">Cercana a la ideal en 4 de 5 imputaciones</span><span lang="en">Close to ideal in 4 of 5 imputations</span></td><td>0,286 / 0,903</td></tr>
+                <tr><td>Brier</td><td>0,031–0,042</td><td>0,038</td></tr>
+                <tr><td><span lang="es">Curva de decisión</span><span lang="en">Decision curve</span></td><td colspan="2"><span lang="es">Beneficio neto superior a «estudiar a todos» y «a ninguno» entre umbrales de 0,1 y 0,7</span><span lang="en">Net benefit above "test all" and "test none" between thresholds of 0.1 and 0.7</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h4 style="margin-top:18px"><span lang="es">Limitaciones</span><span lang="en">Limitations</span></h4>
+          <ul lang="es">
+            <li>Desarrollado en centros terciarios: posible sesgo de espectro; el desempeño puede variar en poblaciones con otra distribución de casos.</li>
+            <li>Algunos pacientes con secreción ectópica tenían enfermedad tumoral avanzada al diagnóstico.</li>
+            <li>Tres pacientes tenían secreción cíclica de cortisol.</li>
+            <li>Validación prospectiva en curso. No sustituye al cateterismo de senos petrosos cuando está indicado y disponible.</li>
+          </ul>
+          <ul lang="en">
+            <li>Developed in tertiary centers: possible spectrum bias; performance may differ in populations with another case mix.</li>
+            <li>Some patients with ectopic secretion had advanced tumor disease at diagnosis.</li>
+            <li>Three patients had cyclic cortisol secretion.</li>
+            <li>Prospective validation is ongoing. It does not replace petrosal sinus sampling when indicated and available.</li>
+          </ul>
+        </section>
+
+        <section class="card tool-section" id="criterios">
+          <div class="head"><span class="icon-bubble peach"><span data-icon="scale"></span></span><h2><span lang="es">Criterios de interpretación</span><span lang="en">Interpretation criteria</span></h2></div>
+          <p class="small muted"><span lang="es">Puntos de corte que usa la interpretación integrada. Tabla generada desde el código, así que siempre coincide con lo que calculan las herramientas.</span><span lang="en">Cutoffs used by the integrated interpretation. Table generated from the code, so it always matches what the tools compute.</span></p>
+          <div class="table-wrap"><table id="crit-table"></table></div>
+          <p class="small" style="margin-top:10px"><span class="tag ok"><span lang="es">Verificado</span><span lang="en">Verified</span></span> <span lang="es">cifra comprobada en el texto de la fuente.</span><span lang="en">figure checked in the source text.</span> <span class="tag review" style="margin-left:8px"><span lang="es">En revisión</span><span lang="en">Under review</span></span> <span lang="es">cifra de uso habitual, pendiente de confirmación del equipo clínico.</span><span lang="en">commonly used figure, pending confirmation by the clinical team.</span></p>
+        </section>
+
+        <section class="card tool-section" id="versiones">
+          <div class="head"><span class="icon-bubble violet"><span data-icon="history"></span></span><h2><span lang="es">Historial de versiones</span><span lang="en">Version history</span></h2></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th><span lang="es">Versión</span><span lang="en">Version</span></th><th><span lang="es">Fecha</span><span lang="en">Date</span></th><th><span lang="es">Cambios</span><span lang="en">Changes</span></th></tr></thead>
+              <tbody>
+                <tr><td>0.1</td><td>2026-11</td><td><span lang="es">Primera versión web: modelo de origen ectópico (4 variables), interpretación integrada, conversor de unidades.</span><span lang="en">First web version: ectopic origin model (4 variables), integrated interpretation, unit converter.</span></td></tr>
+                <tr><td>—</td><td>2025-07</td><td><span lang="es">Herramienta original en Shiny (cushing-predictor).</span><span lang="en">Original Shiny tool (cushing-predictor).</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small muted" style="margin-top:10px"><span lang="es">Versiones anteriores de la herramienta incluían un modelo extendido con glucosa en ayunas. No se incluye en esta versión hasta confirmar con el equipo cuál es la versión publicada.</span><span lang="en">Earlier versions of the tool included an extended model with fasting glucose. It is not included in this version until the team confirms which version is published.</span></p>
+        </section>
+
+        <section class="card tool-section" id="citar">
+          <div class="head"><span class="icon-bubble"><span data-icon="book"></span></span><h2><span lang="es">Cómo citar</span><span lang="en">How to cite</span></h2></div>
+          <div class="equation" style="font-family:var(--font)">Rivera-Martínez WA, Builes-Montaño CE, Aristizábal Henao N, et al. Predictive model for the diagnosis of ectopic Cushing syndrome. <em>Endocr Relat Cancer</em>. 2026;33:e250348. doi:10.1530/ERC-25-0348</div>
+          <h4 style="margin-top:18px"><span lang="es">Referencias de los criterios</span><span lang="en">Criteria references</span></h4>
+          <ol id="ref-list" class="small"></ol>
+        </section>
+      </div>
+    </div>
+  </main>
+  <div id="site-footer"></div>
+  <script type="module" src="../assets/js/site.js"></script>
+  <script type="module">
+    import { CRITERIA, REFERENCES } from "../src/logic/criteria.js";
+    import { getLang } from "../assets/js/site.js";
+    const ROWS = [
+      ["dst1mg", "Cortisol tras 1 mg de dexametasona", "Cortisol after 1 mg dexamethasone", (c) => `> ${c.abnormalAbove_ugdl} µg/dL (50 nmol/L)`],
+      ["ufc", "CLU de 24 h", "24-h UFC", (c) => `> ${c.abnormalAboveULN}×LSN/ULN · ≤ ${c.pseudoOverlapUpToULN}×: pseudo-Cushing`],
+      ["lnsc", "Cortisol salival nocturno", "Late-night salivary cortisol", (c) => `> ${c.abnormalAboveULN}×LSN/ULN`],
+      ["acth", "ACTH plasmática", "Plasma ACTH", (c) => `< ${c.independentBelow_pgml} · ${c.independentBelow_pgml}–${c.dependentAbove_pgml} · > ${c.dependentAbove_pgml} pg/mL`],
+      ["stimulation", "CRH / desmopresina", "CRH / desmopressin", (c) => `ACTH ≥ +${c.acthRisePct}% · cortisol ≥ +${c.cortisolRisePct}%`],
+      ["hddst", "Dexametasona dosis altas", "High-dose dexamethasone", (c) => `> ${c.suppressionPct}%`],
+      ["mri", "RM hipofisaria", "Pituitary MRI", (c) => `< ${c.smallBelow_mm} · ${c.smallBelow_mm}–9 · ≥ ${c.macroadenomaFrom_mm} mm`],
+      ["ipss", "Cateterismo de senos petrosos", "Petrosal sinus sampling", (c) => `≥ ${c.basalRatio} basal · ≥ ${c.stimulatedRatio}`],
+      ["remission", "Cortisol posoperatorio", "Postoperative cortisol", (c) => `< ${c.cortisolBelow_ugdl} µg/dL (55 nmol/L)`],
+      ["ectopicBands", "Modelo de origen ectópico", "Ectopic origin model", (c) => `${c.low * 100}% · ${c.high * 100}%`],
+    ];
+    function render() {
+      const es = getLang() === "es";
+      document.getElementById("crit-table").innerHTML =
+        `<thead><tr><th>${es ? "Prueba" : "Test"}</th><th>${es ? "Punto de corte" : "Cutoff"}</th><th>${es ? "Fuente" : "Source"}</th><th>${es ? "Estado" : "Status"}</th></tr></thead><tbody>` +
+        ROWS.map(([k, e, n, fn]) => {
+          const c = CRITERIA[k];
+          const st = c.status === "verified" ? `<span class="tag ok">${es ? "Verificado" : "Verified"}</span>` : `<span class="tag review">${es ? "En revisión" : "Under review"}</span>`;
+          return `<tr><td>${es ? e : n}</td><td class="mono">${fn(c)}</td><td>${c.refs.map((r) => `<a href="https://doi.org/${REFERENCES[r].doi}">${REFERENCES[r].short}</a>`).join(", ")}</td><td>${st}</td></tr>`;
+        }).join("") + "</tbody>";
+      document.getElementById("ref-list").innerHTML = Object.values(REFERENCES).map((r) => `<li>${r.full} <a href="https://doi.org/${r.doi}">doi:${r.doi}</a></li>`).join("");
+    }
+    render();
+    document.addEventListener("langchange", render);
+    const links = [...document.querySelectorAll(".side nav a")];
+    const obs = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${e.target.id}`)); }), { rootMargin: "-40% 0px -55% 0px" });
+    document.querySelectorAll(".tool-section").forEach((s) => obs.observe(s));
+  </script>
+</body>
+</html>

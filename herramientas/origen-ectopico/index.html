@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modelo de origen ectópico · Cushing</title>
+  <meta name="title-es" content="Modelo de origen ectópico · Cushing">
+  <meta name="title-en" content="Ectopic origin model · Cushing">
+  <meta name="description" content="Calculadora de probabilidad de secreción ectópica de ACTH (Rivera-Martínez et al., Endocrine-Related Cancer 2026).">
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body data-root="../../" data-page="tools">
+  <div id="site-header"></div>
+  <main id="main">
+    <div class="container page-head">
+      <div class="crumbs">
+        <a href="../../"><span lang="es">Inicio</span><span lang="en">Home</span></a> ›
+        <a href="../"><span lang="es">Herramientas</span><span lang="en">Tools</span></a> ›
+        <span><span lang="es">Origen ectópico</span><span lang="en">Ectopic origin</span></span>
+      </div>
+      <h1><span lang="es">Modelo de origen ectópico de ACTH</span><span lang="en">Ectopic ACTH origin model</span></h1>
+      <p class="lead">
+        <span lang="es">Estima la probabilidad de secreción ectópica de ACTH frente a enfermedad de Cushing con cuatro variables de rutina. Modelo desarrollado en 253 pacientes (26 hospitales de España) y validado externamente en 159 pacientes en Colombia.</span>
+        <span lang="en">Estimates the probability of ectopic ACTH secretion versus Cushing's disease from four routine variables. Developed in 253 patients (26 hospitals in Spain) and externally validated in 159 patients in Colombia.</span>
+      </p>
+    </div>
+
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <!-- Aplicabilidad -->
+          <div class="card tint-blue" style="margin-bottom:20px">
+            <h3 style="display:flex;gap:10px;align-items:center"><span data-icon="shield"></span><span lang="es">¿Es aplicable a su paciente?</span><span lang="en">Does it apply to your patient?</span></h3>
+            <p class="small muted" style="margin-bottom:6px"><span lang="es">El modelo solo se validó en esta población. Confirme los tres criterios para activar la calculadora.</span><span lang="en">The model was validated only in this population. Confirm all three criteria to enable the calculator.</span></p>
+            <label class="check"><input type="checkbox" class="crit"> <span><span lang="es">Paciente adulto (≥ 18 años)</span><span lang="en">Adult patient (≥ 18 years)</span></span></label>
+            <label class="check"><input type="checkbox" class="crit"> <span><span lang="es">Hipercortisolismo endógeno confirmado bioquímicamente</span><span lang="en">Biochemically confirmed endogenous hypercortisolism</span></span></label>
+            <label class="check"><input type="checkbox" class="crit"> <span><span lang="es">ACTH-dependiente, con duda sobre el origen</span><span lang="en">ACTH-dependent, with uncertainty about the source</span></span></label>
+          </div>
+
+          <form id="form" class="card" novalidate>
+            <fieldset id="fs" disabled>
+              <legend class="sr-only">Datos del paciente</legend>
+              <h3 style="margin-bottom:16px"><span lang="es">Datos del paciente</span><span lang="en">Patient data</span></h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="acth"><span lang="es">ACTH plasmática</span><span lang="en">Plasma ACTH</span></label>
+                  <div class="input-row">
+                    <input id="acth" type="number" inputmode="decimal" min="0" step="any" aria-describedby="acth-err">
+                    <select id="acth-unit" aria-label="Unidad ACTH"><option>pg/mL</option><option>ng/L</option><option>pmol/L</option></select>
+                  </div>
+                  <span class="err" id="acth-err"></span>
+                </div>
+                <div class="field">
+                  <label for="ufc"><span lang="es">CLU de 24 h (× LSN)</span><span lang="en">24-h UFC (× ULN)</span></label>
+                  <div class="input-row">
+                    <input id="ufc" type="number" inputmode="decimal" min="0" step="any" aria-describedby="ufc-err ufc-hint">
+                    <span class="btn btn-ghost" style="min-height:44px;padding:0 12px;pointer-events:none;border-color:var(--border-strong);color:var(--muted)"><span lang="es">×LSN</span><span lang="en">×ULN</span></span>
+                  </div>
+                  <span class="hint" id="ufc-hint"><a href="#" id="ufc-helper-toggle"><span lang="es">Calcular desde el valor y el LSN del laboratorio</span><span lang="en">Calculate from the value and the lab's ULN</span></a></span>
+                  <span class="err" id="ufc-err"></span>
+                </div>
+                <div class="field" id="ufc-helper" hidden style="grid-column:1/-1">
+                  <div class="card" style="padding:16px;box-shadow:none;background:var(--bg)">
+                    <div class="form-grid">
+                      <div class="field">
+                        <label for="ufc-val"><span lang="es">Resultado CLU</span><span lang="en">UFC result</span></label>
+                        <div class="input-row"><input id="ufc-val" type="number" min="0" step="any"><select id="ufc-val-unit"><option>µg/24 h</option><option>nmol/24 h</option><option>mg/24 h</option></select></div>
+                      </div>
+                      <div class="field">
+                        <label for="ufc-uln"><span lang="es">Límite superior de normalidad</span><span lang="en">Upper limit of normal</span></label>
+                        <div class="input-row"><input id="ufc-uln" type="number" min="0" step="any"><select id="ufc-uln-unit"><option>µg/24 h</option><option>nmol/24 h</option><option>mg/24 h</option></select></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="k"><span lang="es">Potasio nadir</span><span lang="en">Nadir potassium</span></label>
+                  <div class="input-row">
+                    <input id="k" type="number" inputmode="decimal" min="1" max="6" step="any" aria-describedby="k-err">
+                    <select id="k-unit" aria-label="Unidad potasio"><option>mmol/L</option><option>mEq/L</option></select>
+                  </div>
+                  <span class="hint"><span lang="es">Valor más bajo registrado durante el estudio.</span><span lang="en">Lowest value recorded during the work-up.</span></span>
+                  <span class="err" id="k-err"></span>
+                </div>
+                <div class="field">
+                  <label for="size"><span lang="es">Diámetro máximo de lesión hipofisaria</span><span lang="en">Maximum pituitary lesion diameter</span></label>
+                  <div class="input-row">
+                    <input id="size" type="number" inputmode="decimal" min="0" max="30" step="any" aria-describedby="size-err">
+                    <span class="btn btn-ghost" style="min-height:44px;padding:0 12px;pointer-events:none;border-color:var(--border-strong);color:var(--muted)">mm</span>
+                  </div>
+                  <span class="hint"><span lang="es">Resonancia magnética. Introduzca 0 si no hay lesión visible.</span><span lang="en">MRI. Enter 0 if no lesion is visible.</span></span>
+                  <span class="err" id="size-err"></span>
+                </div>
+              </div>
+              <div class="sticky-actions" style="margin-top:18px">
+                <button type="button" class="btn btn-ghost" id="example"><span lang="es">Cargar ejemplo</span><span lang="en">Load example</span></button>
+                <button type="reset" class="btn btn-ghost" id="reset"><span lang="es">Limpiar</span><span lang="en">Clear</span></button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+
+        <!-- Resultado -->
+        <div>
+          <div id="result" class="result" aria-live="polite">
+            <p class="muted" id="result-empty" style="margin:0">
+              <span lang="es">Confirme la aplicabilidad e introduzca los cuatro valores. El resultado se calcula al instante.</span>
+              <span lang="en">Confirm applicability and enter the four values. The result updates instantly.</span>
+            </p>
+            <div id="result-body" hidden>
+              <div class="small muted"><span lang="es">Probabilidad estimada de origen ectópico</span><span lang="en">Estimated probability of ectopic origin</span></div>
+              <div class="prob" id="prob">—</div>
+              <span class="band-label" id="band-label"></span>
+              <div class="meter" aria-hidden="true"><div class="pin" id="pin"></div></div>
+              <div class="meter-scale" aria-hidden="true"><span>0 %</span><span>25 %</span><span>50 %</span><span>75 %</span><span>100 %</span></div>
+              <p id="band-text" style="margin:14px 0 0;color:var(--navy);font-weight:500"></p>
+            </div>
+          </div>
+
+          <div class="card" id="detail" hidden style="margin-top:20px">
+            <h3><span lang="es">¿Qué pesa en este resultado?</span><span lang="en">What drives this result?</span></h3>
+            <p class="small muted"><span lang="es">Contribución de cada variable al predictor lineal (log-odds). Hacia la derecha aumenta la probabilidad de origen ectópico; hacia la izquierda la disminuye.</span><span lang="en">Contribution of each variable to the linear predictor (log-odds). To the right increases the probability of ectopic origin; to the left decreases it.</span></p>
+            <div class="contrib" id="contrib"></div>
+          </div>
+
+          <div class="card chart" id="sens" hidden style="margin-top:20px">
+            <h3><span lang="es">Sensibilidad del resultado</span><span lang="en">Result sensitivity</span></h3>
+            <p class="small muted"><span lang="es">Cómo cambiaría la probabilidad si variara una sola variable, con las demás fijas.</span><span lang="en">How the probability would change if a single variable varied, with the others fixed.</span></p>
+            <div class="seg" role="group" id="sens-seg" aria-label="Variable">
+              <button type="button" data-var="acth" aria-pressed="true">ACTH</button>
+              <button type="button" data-var="potassium" aria-pressed="false"><span lang="es">Potasio</span><span lang="en">Potassium</span></button>
+              <button type="button" data-var="pituitarySize" aria-pressed="false"><span lang="es">Lesión</span><span lang="en">Lesion</span></button>
+              <button type="button" data-var="ufc" aria-pressed="false"><span lang="es">CLU</span><span lang="en">UFC</span></button>
+            </div>
+            <div id="chart" style="margin-top:12px"></div>
+          </div>
+
+          <div class="sticky-actions no-print" id="actions" hidden style="margin-top:16px">
+            <button type="button" class="btn btn-ghost" id="copy"><span data-icon="copy"></span><span lang="es">Copiar resumen</span><span lang="en">Copy summary</span></button>
+            <button type="button" class="btn btn-ghost" onclick="window.print()"><span data-icon="printer"></span><span lang="es">Imprimir</span><span lang="en">Print</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-3 section">
+        <div class="card">
+          <h3><span lang="es">Cómo usar el resultado</span><span lang="en">How to use the result</span></h3>
+          <p class="small"><span lang="es">El modelo se diseñó para el momento de duda diagnóstica entre enfermedad de Cushing y secreción ectópica. Una probabilidad alta puede justificar priorizar la imagen corporal; una intermedia, completar con pruebas de segunda línea o cateterismo de senos petrosos.</span><span lang="en">The model was designed for the point of diagnostic uncertainty between Cushing's disease and ectopic secretion. A high probability may justify prioritizing body imaging; an intermediate one, completing second-line tests or petrosal sinus sampling.</span></p>
+        </div>
+        <div class="card">
+          <h3><span lang="es">Umbrales</span><span lang="en">Thresholds</span></h3>
+          <p class="small"><span lang="es">&lt; 5 %: probabilidad muy baja · 5–25 %: incertidumbre · ≥ 25 %: alta. Son los umbrales operativos de la herramienta original. El análisis de curva de decisión mostró beneficio neto entre 10 % y 70 %.</span><span lang="en">&lt; 5%: very low · 5–25%: uncertain · ≥ 25%: high. These are the original tool's operating thresholds. Decision curve analysis showed net benefit between 10% and 70%.</span></p>
+        </div>
+        <div class="card">
+          <h3><span lang="es">Fuente</span><span lang="en">Source</span></h3>
+          <p class="small">Rivera-Martínez WA, Builes-Montaño CE, et al. <em>Predictive model for the diagnosis of ectopic Cushing syndrome.</em> Endocr Relat Cancer. 2026;33:e250348. <a href="https://doi.org/10.1530/ERC-25-0348">doi:10.1530/ERC-25-0348</a></p>
+          <a href="../../evidencia/" class="small"><span lang="es">Ecuación, validación y limitaciones</span><span lang="en">Equation, validation and limitations</span> ›</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div id="site-footer"></div>
+  <script type="module" src="../../assets/js/site.js"></script>
+  <script type="module" src="../../assets/js/ectopic.js"></script>
+</body>
+</html>

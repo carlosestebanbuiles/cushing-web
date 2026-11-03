@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conversor de unidades · Cushing</title>
+  <meta name="title-es" content="Conversor de unidades · Cushing">
+  <meta name="title-en" content="Unit converter · Cushing">
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body data-root="../../" data-page="tools">
+  <div id="site-header"></div>
+  <main id="main">
+    <div class="container page-head">
+      <div class="crumbs">
+        <a href="../../"><span lang="es">Inicio</span><span lang="en">Home</span></a> ›
+        <a href="../"><span lang="es">Herramientas</span><span lang="en">Tools</span></a> ›
+        <span><span lang="es">Conversor</span><span lang="en">Converter</span></span>
+      </div>
+      <h1><span lang="es">Conversor de unidades</span><span lang="en">Unit converter</span></h1>
+      <p class="lead"><span lang="es">Convierte entre unidades convencionales e internacionales y expresa un resultado como múltiplo del límite superior de normalidad.</span><span lang="en">Converts between conventional and SI units and expresses a result as a multiple of the upper limit of normal.</span></p>
+    </div>
+
+    <div class="container grid grid-2" style="align-items:start">
+      <section class="card">
+        <div style="display:flex;gap:14px;align-items:center;margin-bottom:18px">
+          <div class="icon-bubble green"><span data-icon="exchange"></span></div>
+          <h2 style="margin:0;font-size:1.3rem"><span lang="es">Convertir</span><span lang="en">Convert</span></h2>
+        </div>
+        <div class="field">
+          <label for="analyte"><span lang="es">Determinación</span><span lang="en">Measurement</span></label>
+          <select id="analyte" style="width:100%"></select>
+        </div>
+        <div class="field" style="margin-top:14px">
+          <label for="val"><span lang="es">Valor</span><span lang="en">Value</span></label>
+          <div class="input-row">
+            <input type="number" id="val" step="any" min="0">
+            <select id="unit" aria-label="Unidad"></select>
+          </div>
+        </div>
+        <div class="table-wrap" style="margin-top:18px">
+          <table>
+            <thead><tr><th><span lang="es">Unidad</span><span lang="en">Unit</span></th><th class="num"><span lang="es">Valor</span><span lang="en">Value</span></th></tr></thead>
+            <tbody id="conv-out"></tbody>
+          </table>
+        </div>
+        <p class="small muted" id="factor" style="margin-top:12px"></p>
+      </section>
+
+      <section class="card tint-blue">
+        <div style="display:flex;gap:14px;align-items:center;margin-bottom:8px">
+          <div class="icon-bubble" style="background:var(--card)"><span data-icon="flask"></span></div>
+          <h2 style="margin:0;font-size:1.3rem"><span lang="es">Múltiplo del LSN</span><span lang="en">Multiple of the ULN</span></h2>
+        </div>
+        <p class="small muted"><span lang="es">El modelo de origen ectópico usa el CLU expresado como múltiplo del LSN. Admite unidades distintas para el resultado y el límite.</span><span lang="en">The ectopic origin model uses UFC expressed as a multiple of the ULN. The result and the limit may be in different units.</span></p>
+        <div class="field">
+          <label for="uln-analyte"><span lang="es">Prueba</span><span lang="en">Test</span></label>
+          <select id="uln-analyte" style="width:100%"></select>
+        </div>
+        <div class="field" style="margin-top:14px">
+          <label for="uln-val"><span lang="es">Resultado</span><span lang="en">Result</span></label>
+          <div class="input-row"><input type="number" id="uln-val" step="any" min="0"><select id="uln-val-unit" aria-label="Unidad"></select></div>
+        </div>
+        <div class="field" style="margin-top:14px">
+          <label for="uln-lim"><span lang="es">Límite superior de normalidad</span><span lang="en">Upper limit of normal</span></label>
+          <div class="input-row"><input type="number" id="uln-lim" step="any" min="0"><select id="uln-lim-unit" aria-label="Unidad"></select></div>
+        </div>
+        <div class="result" style="margin-top:18px;text-align:center;background:var(--card)">
+          <div class="small muted"><span lang="es">Resultado (múltiplo del LSN)</span><span lang="en">Result (multiple of ULN)</span></div>
+          <div class="prob" id="uln-out">—</div>
+        </div>
+        <p class="small" style="margin-top:12px;display:flex;gap:8px;align-items:flex-start"><span data-icon="info"></span><span><span lang="es">Use el LSN del mismo laboratorio y método que el resultado: varía entre inmunoensayo y espectrometría de masas.</span><span lang="en">Use the ULN of the same lab and method as the result: it differs between immunoassay and mass spectrometry.</span></span></p>
+      </section>
+    </div>
+  </main>
+  <div id="site-footer"></div>
+  <script type="module" src="../../assets/js/site.js"></script>
+  <script type="module">
+    import { ANALYTES, convert, timesULN, fmt } from "../../src/logic/units.js";
+    import { getLang } from "../../assets/js/site.js";
+    const $ = (id) => document.getElementById(id);
+    const NAMES = {
+      serumCortisol: ["Cortisol sérico", "Serum cortisol"],
+      salivaryCortisol: ["Cortisol salival", "Salivary cortisol"],
+      urinaryCortisol: ["Cortisol libre urinario (24 h)", "Urinary free cortisol (24 h)"],
+      acth: ["ACTH", "ACTH"],
+      potassium: ["Potasio", "Potassium"],
+      glucose: ["Glucosa", "Glucose"],
+    };
+    const ULN_TESTS = ["urinaryCortisol", "salivaryCortisol", "serumCortisol"];
+    const nm = (k) => NAMES[k][getLang() === "es" ? 0 : 1];
+    const dec = (s) => (getLang() === "es" ? s.replace(".", ",") : s);
+    const opts = (sel, keys, label = (k) => k) => { const v = sel.value; sel.innerHTML = keys.map((k) => `<option value="${k}">${label(k)}</option>`).join(""); if (keys.includes(v)) sel.value = v; };
+
+    function fillAnalytes() {
+      opts($("analyte"), Object.keys(ANALYTES), nm);
+      opts($("uln-analyte"), ULN_TESTS, nm);
+    }
+    function fillUnits() {
+      opts($("unit"), Object.keys(ANALYTES[$("analyte").value].units));
+      const u = Object.keys(ANALYTES[$("uln-analyte").value].units);
+      opts($("uln-val-unit"), u); opts($("uln-lim-unit"), u);
+    }
+    function conv() {
+      const a = $("analyte").value, v = parseFloat($("val").value), u = $("unit").value;
+      $("conv-out").innerHTML = Object.keys(ANALYTES[a].units).map((to) => `<tr${to === u ? ' style="font-weight:700"' : ""}><td>${to}</td><td class="num">${Number.isFinite(v) ? dec(fmt(convert(a, v, u, to), 4)) : "—"}</td></tr>`).join("");
+      const units = Object.keys(ANALYTES[a].units);
+      const pairs = units.slice(1).filter((x) => ANALYTES[a].units[x] !== 1).map((x) => `1 ${units[0]} = ${dec(fmt(convert(a, 1, units[0], x), 4))} ${x}`);
+      $("factor").textContent = pairs.join(" · ");
+    }
+    function uln() {
+      const r = timesULN($("uln-analyte").value, parseFloat($("uln-val").value), $("uln-val-unit").value, parseFloat($("uln-lim").value), $("uln-lim-unit").value);
+      $("uln-out").textContent = Number.isFinite(r) ? `${dec(r.toFixed(2))} ×` : "—";
+    }
+    fillAnalytes(); fillUnits(); conv(); uln();
+    $("analyte").addEventListener("change", () => { fillUnits(); conv(); });
+    $("uln-analyte").addEventListener("change", () => { fillUnits(); uln(); });
+    ["val", "unit"].forEach((id) => $(id).addEventListener("input", conv));
+    ["uln-val", "uln-val-unit", "uln-lim", "uln-lim-unit"].forEach((id) => $(id).addEventListener("input", uln));
+    document.addEventListener("langchange", () => { fillAnalytes(); conv(); uln(); });
+  </script>
+</body>
+</html>

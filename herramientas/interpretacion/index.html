@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interpretación integrada · Cushing</title>
+  <meta name="title-es" content="Interpretación integrada · Cushing">
+  <meta name="title-en" content="Integrated interpretation · Cushing">
+  <meta name="description" content="Interpretación automática de las pruebas para el estudio del síndrome de Cushing según los criterios de las guías.">
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body data-root="../../" data-page="tools">
+  <div id="site-header"></div>
+  <main id="main">
+    <div class="container page-head">
+      <div class="crumbs">
+        <a href="../../"><span lang="es">Inicio</span><span lang="en">Home</span></a> ›
+        <a href="../"><span lang="es">Herramientas</span><span lang="en">Tools</span></a> ›
+        <span><span lang="es">Interpretación integrada</span><span lang="en">Integrated interpretation</span></span>
+      </div>
+      <h1><span lang="es">Interpretación integrada de resultados</span><span lang="en">Integrated interpretation of results</span></h1>
+      <p class="lead">
+        <span lang="es">Introduzca solo los resultados disponibles, en las unidades de su laboratorio. Cada bloque se interpreta al instante con los puntos de corte de las guías, y al final se integra todo en un resumen.</span>
+        <span lang="en">Enter only the results you have, in your lab's units. Each block is interpreted instantly using guideline cutoffs, and everything is integrated into a summary at the end.</span>
+      </p>
+      <div class="notice warn">
+        <span data-icon="alert"></span>
+        <p><span lang="es">La interpretación aplica reglas publicadas de forma automática y no conoce el contexto del paciente (fármacos, embarazo, enfermedad aguda, insuficiencia renal, alteraciones de la CBG). Confirme siempre con el juicio clínico.</span><span lang="en">The interpretation applies published rules automatically and does not know the patient's context (drugs, pregnancy, acute illness, renal failure, CBG changes). Always confirm with clinical judgement.</span></p>
+      </div>
+    </div>
+
+    <div class="container with-side">
+      <aside class="side">
+        <nav aria-label="Pasos">
+          <a href="#s1" class="active">1 · <span lang="es">Tamizaje</span><span lang="en">Screening</span></a>
+          <a href="#s2">2 · <span lang="es">Dependencia de ACTH</span><span lang="en">ACTH dependence</span></a>
+          <a href="#s3">3 · <span lang="es">Origen</span><span lang="en">Source</span></a>
+          <a href="#s4">4 · <span lang="es">Posoperatorio</span><span lang="en">Postoperative</span></a>
+          <a href="#summary"><span lang="es">Resumen</span><span lang="en">Summary</span></a>
+        </nav>
+        <button type="button" class="btn btn-ghost" id="clear-all" style="margin-top:16px;width:100%"><span data-icon="refresh"></span><span lang="es">Limpiar todo</span><span lang="en">Clear all</span></button>
+      </aside>
+
+      <form id="form" novalidate>
+        <!-- 1. Tamizaje -->
+        <section class="card tool-section" id="s1">
+          <div class="head"><span class="num">1</span><h2><span lang="es">¿Hay hipercortisolismo?</span><span lang="en">Is there hypercortisolism?</span></h2></div>
+          <div class="two-col">
+            <div>
+              <div class="field">
+                <span class="label"><span lang="es">Cortisol libre urinario (CLU) de 24 h</span><span lang="en">24-h urinary free cortisol (UFC)</span></span>
+                <div class="input-row">
+                  <input type="number" id="ufc" min="0" step="any" data-i18n-attr="placeholder,aria-label" data-es-placeholder="Resultado" data-en-placeholder="Result" data-es-aria-label="Resultado CLU" data-en-aria-label="UFC result">
+                  <input type="number" id="ufc-uln" min="0" step="any" data-i18n-attr="placeholder,aria-label" data-es-placeholder="LSN" data-en-placeholder="ULN" data-es-aria-label="Límite superior CLU" data-en-aria-label="UFC upper limit">
+                  <select id="ufc-unit" aria-label="Unidad"><option>µg/24 h</option><option>nmol/24 h</option><option>mg/24 h</option></select>
+                </div>
+                <span class="hint"><span lang="es">Media de 2–3 recogidas. Resultado y LSN en la misma unidad.</span><span lang="en">Mean of 2–3 collections. Result and ULN in the same unit.</span></span>
+              </div>
+              <div class="field" style="margin-top:16px">
+                <span class="label"><span lang="es">Cortisol salival nocturno</span><span lang="en">Late-night salivary cortisol</span></span>
+                <div class="input-row">
+                  <input type="number" id="lnsc" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="Resultado" data-en-placeholder="Result" aria-label="LNSC">
+                  <input type="number" id="lnsc-uln" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="LSN" data-en-placeholder="ULN" aria-label="LNSC ULN">
+                  <select id="lnsc-unit" aria-label="Unidad"><option>ng/dL</option><option>nmol/L</option><option>µg/dL</option><option>ng/mL</option></select>
+                </div>
+              </div>
+              <div class="field" style="margin-top:16px">
+                <label for="dst"><span lang="es">Cortisol tras 1 mg de dexametasona</span><span lang="en">Cortisol after 1 mg dexamethasone</span></label>
+                <div class="input-row">
+                  <input type="number" id="dst" min="0" step="any">
+                  <select id="dst-unit" aria-label="Unidad"><option>µg/dL</option><option>nmol/L</option></select>
+                </div>
+              </div>
+            </div>
+            <div class="out-panel" id="out1"></div>
+          </div>
+        </section>
+
+        <!-- 2. ACTH -->
+        <section class="card tool-section" id="s2">
+          <div class="head"><span class="num">2</span><h2><span lang="es">¿Es ACTH-dependiente?</span><span lang="en">Is it ACTH-dependent?</span></h2></div>
+          <div class="two-col">
+            <div>
+              <div class="field">
+                <label for="acth"><span lang="es">ACTH plasmática (basal, matutina)</span><span lang="en">Plasma ACTH (basal, morning)</span></label>
+                <div class="input-row">
+                  <input type="number" id="acth" min="0" step="any">
+                  <select id="acth-unit" aria-label="Unidad"><option>pg/mL</option><option>ng/L</option><option>pmol/L</option></select>
+                </div>
+              </div>
+            </div>
+            <div class="out-panel" id="out2"></div>
+          </div>
+        </section>
+
+        <!-- 3. Origen -->
+        <section class="card tool-section" id="s3">
+          <div class="head"><span class="num">3</span><h2><span lang="es">¿Cuál es el origen?</span><span lang="en">What is the source?</span></h2></div>
+          <div class="two-col">
+            <div>
+              <div class="field">
+                <label for="mri"><span lang="es">RM hipofisaria: diámetro máximo de la lesión</span><span lang="en">Pituitary MRI: maximum lesion diameter</span></label>
+                <div class="input-row"><input type="number" id="mri" min="0" step="any"><span class="btn" style="min-height:44px;border:1px solid var(--border-strong);color:var(--muted);pointer-events:none">mm</span></div>
+                <span class="hint"><span lang="es">0 si no hay lesión visible.</span><span lang="en">0 if no visible lesion.</span></span>
+              </div>
+
+              <div class="field" style="margin-top:16px">
+                <span class="label">
+                  <span lang="es">Prueba de estímulo</span><span lang="en">Stimulation test</span>
+                  <select id="stim-type" aria-label="Tipo" style="min-width:0;margin-left:8px;min-height:34px;padding:4px 28px 4px 8px">
+                    <option value="crh">CRH</option>
+                    <option value="ddavp" data-i18n-attr="label" data-es-label="Desmopresina" data-en-label="Desmopressin">Desmopresina</option>
+                  </select>
+                </span>
+                <div class="form-grid" style="gap:8px 10px">
+                  <input type="number" id="stim-acth-b" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="ACTH basal" data-en-placeholder="Basal ACTH" aria-label="ACTH basal">
+                  <input type="number" id="stim-acth-p" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="ACTH pico" data-en-placeholder="Peak ACTH" aria-label="ACTH pico">
+                  <input type="number" id="stim-cort-b" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="Cortisol basal" data-en-placeholder="Basal cortisol" aria-label="Cortisol basal">
+                  <input type="number" id="stim-cort-p" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="Cortisol pico" data-en-placeholder="Peak cortisol" aria-label="Cortisol pico">
+                </div>
+                <span class="hint"><span lang="es">Basal = media de los valores previos; pico = media a 15–30 min (ACTH) y 30–45 min (cortisol). Cualquier unidad, la misma para basal y pico.</span><span lang="en">Basal = mean of pre-test values; peak = mean at 15–30 min (ACTH) and 30–45 min (cortisol). Any unit, the same for basal and peak.</span></span>
+              </div>
+
+              <div class="field" style="margin-top:16px">
+                <span class="label"><span lang="es">Dexametasona a dosis altas (8 mg)</span><span lang="en">High-dose dexamethasone (8 mg)</span></span>
+                <div class="form-grid" style="gap:8px 10px">
+                  <input type="number" id="hd-b" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="Cortisol basal" data-en-placeholder="Basal cortisol" aria-label="Cortisol basal">
+                  <input type="number" id="hd-a" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="Cortisol tras dexametasona" data-en-placeholder="Cortisol after dexamethasone" aria-label="Cortisol tras dexametasona">
+                </div>
+              </div>
+
+              <div class="field" style="margin-top:16px">
+                <span class="label"><span lang="es">Cateterismo de senos petrosos: gradiente central:periférico máximo</span><span lang="en">Petrosal sinus sampling: maximum central:peripheral gradient</span></span>
+                <div class="form-grid" style="gap:8px 10px">
+                  <input type="number" id="ipss-b" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="Basal" data-en-placeholder="Basal" aria-label="Basal">
+                  <input type="number" id="ipss-s" min="0" step="any" data-i18n-attr="placeholder" data-es-placeholder="Tras estímulo" data-en-placeholder="After stimulation" aria-label="Estimulado">
+                </div>
+              </div>
+
+              <div class="field" style="margin-top:16px">
+                <label for="k"><span lang="es">Potasio nadir (para el modelo de origen ectópico)</span><span lang="en">Nadir potassium (for the ectopic origin model)</span></label>
+                <div class="input-row"><input type="number" id="k" min="1" max="6" step="any"><span class="btn" style="min-height:44px;border:1px solid var(--border-strong);color:var(--muted);pointer-events:none">mmol/L</span></div>
+                <span class="hint"><span lang="es">El modelo usa además la ACTH (paso 2), el CLU (paso 1) y la RM.</span><span lang="en">The model also uses ACTH (step 2), UFC (step 1) and MRI.</span></span>
+              </div>
+            </div>
+            <div class="out-panel" id="out3"></div>
+          </div>
+        </section>
+
+        <!-- 4. Posoperatorio -->
+        <section class="card tool-section" id="s4">
+          <div class="head"><span class="num">4</span><h2><span lang="es">Tras la cirugía hipofisaria</span><span lang="en">After pituitary surgery</span></h2></div>
+          <div class="two-col">
+            <div>
+              <div class="field">
+                <label for="postop"><span lang="es">Cortisol sérico matutino posoperatorio</span><span lang="en">Postoperative morning serum cortisol</span></label>
+                <div class="input-row">
+                  <input type="number" id="postop" min="0" step="any">
+                  <select id="postop-unit" aria-label="Unidad"><option>µg/dL</option><option>nmol/L</option></select>
+                </div>
+                <span class="hint"><span lang="es">Sin glucocorticoides en las horas previas a la muestra.</span><span lang="en">Without glucocorticoids in the hours before sampling.</span></span>
+              </div>
+            </div>
+            <div class="out-panel" id="out4"></div>
+          </div>
+        </section>
+
+        <!-- Resumen -->
+        <section class="card tool-section tint-blue" id="summary">
+          <div class="head"><span class="num" style="background:var(--navy)">✓</span><h2><span lang="es">Resumen de la interpretación</span><span lang="en">Interpretation summary</span></h2></div>
+          <div id="sum-body"></div>
+          <div class="sticky-actions no-print" style="margin-top:16px">
+            <button type="button" class="btn btn-primary" id="copy"><span data-icon="copy"></span><span lang="es">Copiar resumen</span><span lang="en">Copy summary</span></button>
+            <button type="button" class="btn btn-ghost" onclick="window.print()"><span data-icon="printer"></span><span lang="es">Imprimir</span><span lang="en">Print</span></button>
+          </div>
+        </section>
+
+        <p class="small muted" style="margin-top:20px">
+          <span lang="es">Puntos de corte y fuentes: <a href="../../evidencia/#criterios">tabla de criterios</a>. Referencias principales: Nieman et al. 2008 (Endocrine Society); Fleseriu et al. 2021 (Pituitary Society); Nieman et al. 1993 (prueba de CRH).</span>
+          <span lang="en">Cutoffs and sources: <a href="../../evidencia/#criterios">criteria table</a>. Main references: Nieman et al. 2008 (Endocrine Society); Fleseriu et al. 2021 (Pituitary Society); Nieman et al. 1993 (CRH test).</span>
+        </p>
+      </form>
+    </div>
+  </main>
+  <div id="site-footer"></div>
+  <script type="module" src="../../assets/js/site.js"></script>
+  <script type="module" src="../../assets/js/interpret.js"></script>
+</body>
+</html>
