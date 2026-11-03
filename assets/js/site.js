@@ -28,6 +28,7 @@ const P = {
   pulse: '<path d="M3 12h4l3 8 4-16 3 8h4"/>',
   scan: '<path d="M4 8V6a2 2 0 0 1 2-2h2M4 16v2a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v2M16 20h2a2 2 0 0 0 2-2v-2"/><circle cx="12" cy="12" r="3"/>',
   refresh: '<path d="M20 11A8.1 8.1 0 0 0 4.5 9M4 5v4h4M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/>',
+  external: '<path d="M12 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6M11 13l9-9M15 4h5v5"/>',
   calendar: '<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M16 3v4M8 3v4M4 11h16M8 15h2v2H8z"/>',
   scale: '<path d="M7 20h10M12 4v16M5 8h14M5 8l-3 7a4 4 0 0 0 6 0zM19 8l-3 7a4 4 0 0 0 6 0z"/>',
 };
@@ -136,7 +137,7 @@ function renderFooter() {
       <p class="small">${L("Este sitio no recoge ni guarda ningún dato.", "This site does not collect or store any data.")}</p>
       <div class="footer-row">
         <span>${L("Propuesta conceptual · demo de pacientes", "Concept proposal · patient demo")}</span>
-        <nav aria-label="Pie"><a href="${ROOT}pacientes/entender/#preguntas">${L("Preguntas frecuentes", "FAQ")}</a></nav>
+        <nav aria-label="Pie"><a href="${ROOT}pacientes/recursos/">${L("Recursos de confianza", "Trusted resources")}</a><a href="${ROOT}pacientes/entender/#preguntas">${L("Preguntas frecuentes", "FAQ")}</a></nav>
       </div>
     </div>
   </footer>`;
