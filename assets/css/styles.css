@@ -377,3 +377,26 @@ body[data-site="patients"] { font-size: 17px; }
 .qa summary { font-size: 1.02rem; }
 @media print { .write-lines { border-color: #999; } }
 @media (max-width: 1440px) { body[data-site="patients"] .brand-tag { display: none; } body[data-site="patients"] .nav a { padding: 10px 11px; } }
+.note-area { font: inherit; color: var(--navy); background: var(--card); width: 100%; border: 1px solid var(--border-strong); border-radius: 10px; padding: 10px 12px; resize: vertical; min-height: 60px; line-height: 1.5; }
+.note-area:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-100); }
+.field-label { display: block; font-weight: 600; color: var(--navy); margin: 12px 0 6px; font-size: .95rem; }
+.print-only { display: none; }
+@media print {
+  .print-only { display: block; }
+  .note-area { border: 0; border-bottom: 1px solid #999; border-radius: 0; resize: none; overflow: visible; min-height: 90px; background: transparent; }
+  .check input { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .card { break-inside: avoid; }
+  .page-head { padding-top: 0; }
+}
+@media print {
+  body[data-site="patients"] { font-size: 12.5px; }
+  #visit-form .icon-bubble, #visit-form .tint-green { display: none !important; }
+  #visit-form .card { padding: 12px 14px; }
+  #visit-form .grid { gap: 10px; }
+  #visit-form .grid + .grid, #visit-form > section { margin-top: 10px !important; }
+  #visit-form .check { padding: 3px 0; }
+  #visit-form h3 { font-size: 1rem; margin-bottom: 4px; }
+  #visit-form .note-area { min-height: 70px; padding: 4px 0; }
+  .page-head h1 { font-size: 1.6rem; margin-bottom: 4px; }
+}
+@media print { .note-area:focus { box-shadow: none; border-color: #999; } }

@@ -14,41 +14,86 @@
   <div id="site-header"></div>
   <main id="main">
     <div class="container page-head">
-      <div class="crumbs"><a href="../"><span lang="es">Inicio</span><span lang="en">Home</span></a> › <span><span lang="es">Prepara tu consulta</span><span lang="en">Prepare your visit</span></span></div>
+      <div class="crumbs no-print"><a href="../"><span lang="es">Inicio</span><span lang="en">Home</span></a> › <span><span lang="es">Prepara tu consulta</span><span lang="en">Prepare your visit</span></span></div>
       <h1><span lang="es">Prepara tu próxima consulta</span><span lang="en">Prepare your next visit</span></h1>
-      <p class="lead"><span lang="es">Imprime esta página y complétala a mano antes de ir. Así aprovecharás mejor el tiempo con tu equipo.</span><span lang="en">Print this page and fill it in by hand before you go. It will help you make the most of your time with your team.</span></p>
-      <div class="sticky-actions no-print" style="margin-bottom:12px">
-        <button type="button" class="btn btn-primary" onclick="window.print()"><span data-icon="printer"></span><span lang="es">Imprimir</span><span lang="en">Print</span></button>
-      </div>
-      <p class="small muted no-print" style="display:flex;gap:8px;align-items:center"><span data-icon="shield"></span><span lang="es">No escribes nada en esta página: no se recoge ni guarda ningún dato.</span><span lang="en">You don't type anything on this page: no data is collected or stored.</span></p>
+      <p class="lead no-print"><span lang="es">Complétalo aquí y luego imprímelo, guárdalo como PDF o envíatelo para tenerlo a mano en la consulta. También puedes imprimirlo en blanco y llenarlo a mano.</span><span lang="en">Fill it in here, then print it, save it as a PDF or send it to yourself so you have it at your visit. You can also print it blank and fill it in by hand.</span></p>
+      <div class="notice info no-print"><span data-icon="shield"></span><p><span lang="es"><strong>Lo que escribes se queda en tu dispositivo.</strong> No se envía a este sitio ni se guarda: si cierras o recargas la página, se borra. No escribas tu nombre ni números de identificación.</span><span lang="en"><strong>What you write stays on your device.</strong> It is not sent to this site or stored: if you close or reload the page, it is erased. Do not write your name or ID numbers.</span></p></div>
+      <p class="print-only small"><span lang="es">Preparado para mi consulta · fecha: ____________</span><span lang="en">Prepared for my visit · date: ____________</span></p>
     </div>
 
-    <div class="container">
-      <div class="grid grid-3">
+    <form class="container" id="visit-form" autocomplete="off" onsubmit="return false">
+      <div class="grid grid-2">
         <section class="card">
           <div class="icon-bubble green" style="margin-bottom:10px"><span data-icon="file"></span></div>
           <h3><span lang="es">Qué llevar</span><span lang="en">What to bring</span></h3>
-          <ul class="checklist" lang="es"><li>Lista de todos mis medicamentos, con dosis, incluidas cremas, inhaladores e infiltraciones</li><li>Resultados de análisis e imágenes anteriores</li><li>Fotos antiguas, si notas cambios en tu aspecto</li><li>Registro de presión arterial o glucosa, si lo llevas</li><li>Un acompañante, si lo deseas</li></ul>
-          <ul class="checklist" lang="en"><li>List of all my medicines, with doses, including creams, inhalers and injections</li><li>Previous test and imaging results</li><li>Old photos, if you notice changes in your appearance</li><li>Blood pressure or glucose log, if you keep one</li><li>Someone to come with you, if you wish</li></ul>
+          <div lang="es">
+            <label class="check"><input type="checkbox" data-group="bring"> <span>Lista de todos mis medicamentos, con dosis, incluidas cremas, inhaladores e infiltraciones</span></label>
+            <label class="check"><input type="checkbox" data-group="bring"> <span>Resultados de análisis e imágenes anteriores</span></label>
+            <label class="check"><input type="checkbox" data-group="bring"> <span>Fotos antiguas, si noto cambios en mi aspecto</span></label>
+            <label class="check"><input type="checkbox" data-group="bring"> <span>Registro de presión arterial o glucosa, si lo llevo</span></label>
+            <label class="check"><input type="checkbox" data-group="bring"> <span>Un acompañante, si lo deseo</span></label>
+          </div>
+          <div lang="en">
+            <label class="check"><input type="checkbox" data-group="bring"> <span>List of all my medicines, with doses, including creams, inhalers and injections</span></label>
+            <label class="check"><input type="checkbox" data-group="bring"> <span>Previous test and imaging results</span></label>
+            <label class="check"><input type="checkbox" data-group="bring"> <span>Old photos, if I notice changes in my appearance</span></label>
+            <label class="check"><input type="checkbox" data-group="bring"> <span>Blood pressure or glucose log, if I keep one</span></label>
+            <label class="check"><input type="checkbox" data-group="bring"> <span>Someone to come with me, if I wish</span></label>
+          </div>
         </section>
-        <section class="card">
-          <div class="icon-bubble" style="margin-bottom:10px"><span data-icon="pulse"></span></div>
-          <h3><span lang="es">Mis síntomas y cambios</span><span lang="en">My symptoms and changes</span></h3>
-          <p class="small muted"><span lang="es">Anota desde cuándo y cómo han cambiado.</span><span lang="en">Note since when and how they have changed.</span></p>
-          <div class="write-lines"></div><div class="write-lines"></div><div class="write-lines"></div><div class="write-lines"></div><div class="write-lines"></div><div class="write-lines"></div>
-        </section>
+
         <section class="card">
           <div class="icon-bubble peach" style="margin-bottom:10px"><span data-icon="info"></span></div>
-          <h3><span lang="es">Preguntas que puedo hacer</span><span lang="en">Questions I can ask</span></h3>
-          <ul class="checklist" lang="es"><li>¿Qué pruebas faltan y para qué sirven?</li><li>¿Qué significan mis resultados hasta ahora?</li><li>¿Cuáles son mis opciones de tratamiento?</li><li>¿Qué debo hacer si me pongo enfermo?</li><li>¿A quién llamo si tengo dudas entre consultas?</li></ul>
-          <ul class="checklist" lang="en"><li>Which tests are pending and what are they for?</li><li>What do my results so far mean?</li><li>What are my treatment options?</li><li>What should I do if I get ill?</li><li>Whom do I call with questions between visits?</li></ul>
+          <h3><span lang="es">Preguntas que quiero hacer</span><span lang="en">Questions I want to ask</span></h3>
+          <div lang="es">
+            <label class="check"><input type="checkbox" data-group="ask"> <span>¿Qué pruebas faltan y para qué sirven?</span></label>
+            <label class="check"><input type="checkbox" data-group="ask"> <span>¿Qué significan mis resultados hasta ahora?</span></label>
+            <label class="check"><input type="checkbox" data-group="ask"> <span>¿Cuáles son mis opciones de tratamiento?</span></label>
+            <label class="check"><input type="checkbox" data-group="ask"> <span>¿Qué debo hacer si me pongo enfermo?</span></label>
+            <label class="check"><input type="checkbox" data-group="ask"> <span>¿A quién llamo si tengo dudas entre consultas?</span></label>
+          </div>
+          <div lang="en">
+            <label class="check"><input type="checkbox" data-group="ask"> <span>Which tests are pending and what are they for?</span></label>
+            <label class="check"><input type="checkbox" data-group="ask"> <span>What do my results so far mean?</span></label>
+            <label class="check"><input type="checkbox" data-group="ask"> <span>What are my treatment options?</span></label>
+            <label class="check"><input type="checkbox" data-group="ask"> <span>What should I do if I get ill?</span></label>
+            <label class="check"><input type="checkbox" data-group="ask"> <span>Whom do I call with questions between visits?</span></label>
+          </div>
+          <label class="field-label" for="f-otherq"><span lang="es">Otras preguntas</span><span lang="en">Other questions</span></label>
+          <textarea id="f-otherq" class="note-area" rows="3"></textarea>
+        </section>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:20px">
+        <section class="card">
+          <div class="icon-bubble" style="margin-bottom:10px"><span data-icon="pulse"></span></div>
+          <h3><label for="f-symptoms"><span lang="es">Mis síntomas y cambios</span><span lang="en">My symptoms and changes</span></label></h3>
+          <p class="small muted"><span lang="es">Desde cuándo y cómo han cambiado.</span><span lang="en">Since when and how they have changed.</span></p>
+          <textarea id="f-symptoms" class="note-area" rows="5"></textarea>
+        </section>
+        <section class="card">
+          <div class="icon-bubble violet" style="margin-bottom:10px"><span data-icon="file"></span></div>
+          <h3><label for="f-meds"><span lang="es">Mis medicamentos</span><span lang="en">My medicines</span></label></h3>
+          <p class="small muted"><span lang="es">Nombre y dosis. Incluye cremas, inhaladores, gotas e infiltraciones.</span><span lang="en">Name and dose. Include creams, inhalers, drops and injections.</span></p>
+          <textarea id="f-meds" class="note-area" rows="5"></textarea>
         </section>
       </div>
 
       <section class="card" style="margin-top:20px">
-        <h3><span lang="es">Lo que más me preocupa</span><span lang="en">What worries me most</span></h3>
-        <div class="write-lines"></div><div class="write-lines"></div><div class="write-lines"></div>
+        <h3><label for="f-worry"><span lang="es">Lo que más me preocupa</span><span lang="en">What worries me most</span></label></h3>
+        <textarea id="f-worry" class="note-area" rows="3"></textarea>
       </section>
+
+      <div class="card tint-blue no-print" style="margin-top:20px">
+        <h3><span lang="es">¿Qué quieres hacer con tu hoja?</span><span lang="en">What do you want to do with your sheet?</span></h3>
+        <div class="sticky-actions">
+          <button type="button" class="btn btn-primary" id="b-print"><span data-icon="printer"></span><span lang="es">Imprimir o guardar PDF</span><span lang="en">Print or save PDF</span></button>
+          <button type="button" class="btn btn-ghost" id="b-send"><span data-icon="exchange"></span><span lang="es">Enviármelo</span><span lang="en">Send it to myself</span></button>
+          <button type="button" class="btn btn-ghost" id="b-copy"><span data-icon="copy"></span><span lang="es">Copiar texto</span><span lang="en">Copy text</span></button>
+          <button type="button" class="btn btn-ghost" id="b-clear" style="margin-left:auto"><span data-icon="refresh"></span><span lang="es">Borrar todo</span><span lang="en">Clear all</span></button>
+        </div>
+        <p class="small muted" id="status" role="status" style="margin:12px 0 0"><span lang="es">Para guardar un PDF, elige «Guardar como PDF» en la ventana de impresión. «Enviármelo» abre tu correo o el menú de compartir de tu teléfono: tú eliges a quién enviarlo.</span><span lang="en">To save a PDF, choose "Save as PDF" in the print window. "Send it to myself" opens your email or your phone's share menu: you choose where it goes.</span></p>
+      </div>
 
       <section class="card tint-green" style="margin-top:20px;display:flex;gap:16px;align-items:flex-start">
         <div class="icon-bubble green" style="background:var(--card)"><span data-icon="users"></span></div>
@@ -57,9 +102,10 @@
           <p style="margin:0"><span lang="es">Quien te acompaña puede ayudarte a recordar lo que se dijo, notar cambios que tú no ves y saber qué hacer ante una señal de alarma. Comparte con ellos la sección de <a href="../etapas/#urgencias">señales de alarma</a>.</span><span lang="en">The person who comes with you can help remember what was said, notice changes you may not see and know what to do if there is a warning sign. Share the <a href="../etapas/#urgencias">warning signs</a> section with them.</span></p>
         </div>
       </section>
-    </div>
+    </form>
   </main>
   <div id="site-footer"></div>
   <script type="module" src="../../assets/js/site.js"></script>
+  <script type="module" src="../../assets/js/visit.js"></script>
 </body>
 </html>
