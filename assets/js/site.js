@@ -3,6 +3,8 @@
 
 const ROOT = document.body.dataset.root || "./";
 const PAGE = document.body.dataset.page || "";
+// Sitio de pacientes: cabecera, menú y pie propios; sin enlaces a las herramientas.
+const PATIENTS = document.body.dataset.site === "patients";
 
 // ---------- Iconos (trazo, 24×24) / icons ----------
 const P = {
@@ -76,6 +78,13 @@ const NAV = [
   { key: "evidence", href: "evidencia/", es: "Evidencia", en: "Evidence" },
   { key: "about", href: "acerca/", es: "Acerca de", en: "About" },
 ];
+const NAV_PATIENTS = [
+  { key: "p-home", href: "pacientes/", es: "Inicio", en: "Home" },
+  { key: "p-understand", href: "pacientes/entender/", es: "Entender el Cushing", en: "Understanding Cushing's" },
+  { key: "p-tests", href: "pacientes/pruebas/", es: "Mis pruebas", en: "My tests" },
+  { key: "p-stages", href: "pacientes/etapas/", es: "Etapas", en: "Stages" },
+  { key: "p-visit", href: "pacientes/consulta/", es: "Prepara tu consulta", en: "Prepare your visit" },
+];
 const L = (es, en) => `<span lang="es">${es}</span><span lang="en">${en}</span>`;
 
 function renderHeader() {
@@ -85,16 +94,16 @@ function renderHeader() {
   <a class="skip" href="#main">${L("Saltar al contenido", "Skip to content")}</a>
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="${ROOT}">${LOGO}
+      <a class="brand" href="${ROOT}${PATIENTS ? "pacientes/" : ""}">${LOGO}
         <span><span class="brand-name">Cushing</span>
-        <span class="brand-tag">${L("Herramientas y conocimiento para profesionales", "Tools and knowledge for clinicians")}</span></span>
+        <span class="brand-tag">${PATIENTS ? L("Información clara para ti y quienes te cuidan", "Clear information for you and those who care for you") : L("Herramientas y conocimiento para profesionales", "Tools and knowledge for clinicians")}</span></span>
       </a>
       <button class="menu-btn" aria-expanded="false" aria-controls="main-nav">${icon("menu")}<span class="sr-only">${L("Menú", "Menu")}</span></button>
       <nav class="nav" id="main-nav" aria-label="${"Principal"}">
-        ${NAV.map((n) => `<a href="${ROOT}${n.href}"${n.key === PAGE ? ' aria-current="page"' : ""}>${L(n.es, n.en)}</a>`).join("")}
+        ${(PATIENTS ? NAV_PATIENTS : NAV).map((n) => `<a href="${ROOT}${n.href}"${n.key === PAGE ? ' aria-current="page"' : ""}>${L(n.es, n.en)}</a>`).join("")}
       </nav>
       <div class="header-tools">
-        <span class="badge-pre">${L("Versión preliminar", "Preliminary version")}</span>
+        <span class="badge-pre">${PATIENTS ? L("Demo · borrador", "Demo · draft") : L("Versión preliminar", "Preliminary version")}</span>
         <div class="lang-toggle" role="group" aria-label="Idioma / Language">
           <button type="button" data-lang="es" aria-pressed="false">ES</button>
           <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -115,6 +124,23 @@ function renderHeader() {
 function renderFooter() {
   const el = document.getElementById("site-footer");
   if (!el) return;
+  if (PATIENTS) {
+    el.outerHTML = `
+  <footer class="site-footer">
+    <div class="container">
+      <p>${L(
+        "Esta información es general y educativa. No reemplaza la orientación de tu equipo de salud, que conoce tu caso. Ante cualquier duda sobre tus resultados o tu tratamiento, consúltales.",
+        "This information is general and educational. It does not replace advice from your care team, who know your case. If you have any doubt about your results or treatment, ask them."
+      )}</p>
+      <p class="small">${L("Este sitio no recoge ni guarda ningún dato.", "This site does not collect or store any data.")}</p>
+      <div class="footer-row">
+        <span>${L("Propuesta conceptual · demo de pacientes", "Concept proposal · patient demo")}</span>
+        <nav aria-label="Pie"><a href="${ROOT}pacientes/entender/#preguntas">${L("Preguntas frecuentes", "FAQ")}</a></nav>
+      </div>
+    </div>
+  </footer>`;
+    return;
+  }
   const slot = (es, en, name) => `<div class="logo-slot"><span>${L(es, en)}</span><strong>${name}</strong></div>`;
   el.outerHTML = `
   <footer class="site-footer">
@@ -180,4 +206,4 @@ document.querySelectorAll("[data-icon]").forEach((el) => { el.innerHTML = icon(e
 renderHeader();
 renderFooter();
 setLang(initialLang());
-if (document.body.dataset.gate !== "off") renderGate();
+if (!PATIENTS && document.body.dataset.gate !== "off") renderGate();
