@@ -13,16 +13,15 @@
 <body data-root="../" data-page="p-home" data-site="patients">
   <div id="site-header"></div>
   <main id="main">
-    <section class="hero p-hero">
-      <svg class="blobs" viewBox="0 0 420 320" aria-hidden="true">
-        <ellipse cx="300" cy="120" rx="150" ry="95" fill="#bfe0f5" transform="rotate(-18 300 120)"/>
-        <ellipse cx="230" cy="190" rx="110" ry="80" fill="#cfe9d5" transform="rotate(25 230 190)"/>
-        <ellipse cx="350" cy="230" rx="95" ry="70" fill="#fbd9c3"/>
-      </svg>
-      <div class="container" style="position:relative">
+    <section class="p-hero2">
+      <picture>
+        <source media="(max-width: 899px)" srcset="../assets/img/pacientes/portada-900.webp">
+        <img class="p-hero2-img" src="../assets/img/pacientes/portada-1600.webp" alt="" width="1600" height="900" fetchpriority="high">
+      </picture>
+      <div class="container p-hero2-text">
         <h1><span lang="es">Acompañarte en cada etapa</span><span lang="en">With you at every stage</span></h1>
         <p class="lead"><span lang="es">Información clara sobre el síndrome de Cushing para ti y para quienes te cuidan: qué es, qué pruebas te pueden pedir y cómo prepararte.</span><span lang="en">Clear information about Cushing's syndrome for you and those who care for you: what it is, which tests you may need and how to prepare.</span></p>
-        <div class="notice draft" style="max-width:720px"><span data-icon="file"></span><p><strong><span lang="es">Demo en borrador.</span><span lang="en">Draft demo.</span></strong> <span lang="es">Contenido pendiente de revisión por el equipo clínico. No usar con pacientes todavía.</span><span lang="en">Content pending review by the clinical team. Do not use with patients yet.</span></p></div>
+        <div class="notice draft"><span data-icon="file"></span><p><strong><span lang="es">Demo en borrador.</span><span lang="en">Draft demo.</span></strong> <span lang="es">Contenido pendiente de revisión por el equipo clínico. No usar con pacientes todavía.</span><span lang="en">Content pending review by the clinical team. Do not use with patients yet.</span></p></div>
       </div>
     </section>
 
@@ -30,10 +29,10 @@
       <div class="container">
         <h2><span lang="es">¿En qué momento estás?</span><span lang="en">Where are you right now?</span></h2>
         <div class="grid grid-4" style="margin-top:16px">
-          <a class="stage-card s1" href="etapas/#estudiando"><span class="deco"></span><div><h3><span lang="es">Me están estudiando</span><span lang="en">I'm being tested</span></h3><p><span lang="es">Qué esperar de las pruebas</span><span lang="en">What to expect from tests</span></p></div><span class="arrow" data-icon="chevron"></span></a>
-          <a class="stage-card s2" href="etapas/#diagnostico"><span class="deco"></span><div><h3><span lang="es">Ya tengo un diagnóstico</span><span lang="en">I have a diagnosis</span></h3><p><span lang="es">Entender qué significa</span><span lang="en">Understanding what it means</span></p></div><span class="arrow" data-icon="chevron"></span></a>
-          <a class="stage-card s3" href="etapas/#tratamiento"><span class="deco"></span><div><h3><span lang="es">Voy a recibir tratamiento</span><span lang="en">I'm starting treatment</span></h3><p><span lang="es">Opciones y preparación</span><span lang="en">Options and preparation</span></p></div><span class="arrow" data-icon="chevron"></span></a>
-          <a class="stage-card s4" href="etapas/#recuperacion"><span class="deco"></span><div><h3><span lang="es">Estoy en recuperación</span><span lang="en">I'm recovering</span></h3><p><span lang="es">Cuidados y seguimiento</span><span lang="en">Care and follow-up</span></p></div><span class="arrow" data-icon="chevron"></span></a>
+          <a class="stage-card s1" href="etapas/#estudiando"><img class="stage-img" src="../assets/img/pacientes/etapa-estudiando.webp" alt="" width="560" height="560" loading="lazy"><div><h3><span lang="es">Me están estudiando</span><span lang="en">I'm being tested</span></h3><p><span lang="es">Qué esperar de las pruebas</span><span lang="en">What to expect from tests</span></p></div><span class="arrow" data-icon="chevron"></span></a>
+          <a class="stage-card s2" href="etapas/#diagnostico"><img class="stage-img" src="../assets/img/pacientes/etapa-diagnostico.webp" alt="" width="560" height="560" loading="lazy"><div><h3><span lang="es">Ya tengo un diagnóstico</span><span lang="en">I have a diagnosis</span></h3><p><span lang="es">Entender qué significa</span><span lang="en">Understanding what it means</span></p></div><span class="arrow" data-icon="chevron"></span></a>
+          <a class="stage-card s3" href="etapas/#tratamiento"><span class="stage-ph" data-icon="calendar"></span><div><h3><span lang="es">Voy a recibir tratamiento</span><span lang="en">I'm starting treatment</span></h3><p><span lang="es">Opciones y preparación</span><span lang="en">Options and preparation</span></p></div><span class="arrow" data-icon="chevron"></span></a>
+          <a class="stage-card s4" href="etapas/#recuperacion"><img class="stage-img" src="../assets/img/pacientes/etapa-recuperacion.webp" alt="" width="560" height="560" loading="lazy"><div><h3><span lang="es">Estoy en recuperación</span><span lang="en">I'm recovering</span></h3><p><span lang="es">Cuidados y seguimiento</span><span lang="en">Care and follow-up</span></p></div><span class="arrow" data-icon="chevron"></span></a>
         </div>
       </div>
     </section>

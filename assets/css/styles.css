@@ -400,3 +400,23 @@ body[data-site="patients"] { font-size: 17px; }
   .page-head h1 { font-size: 1.6rem; margin-bottom: 4px; }
 }
 @media print { .note-area:focus { box-shadow: none; border-color: #999; } }
+
+/* Ilustraciones del sitio de pacientes */
+.p-hero2 { position: relative; overflow: hidden; background: #e9f3fb; min-height: 500px; display: flex; align-items: center;
+  --navy: #0d2745; --ink: #23384f; --muted: #5a6b7d; color: var(--ink); }
+.p-hero2-img { position: absolute; right: 0; top: 0; height: 100%; width: auto; max-width: none; object-fit: cover; object-position: right center; }
+.p-hero2-text { position: relative; padding-top: 48px; padding-bottom: 48px; }
+.p-hero2-text > * { max-width: 540px; }
+.p-hero2 h1 { font-size: clamp(2.2rem, 5vw, 3.3rem); color: var(--navy); }
+.p-hero2 .notice.draft { background: #fdf5e6; border-color: #f0dcb4; color: var(--navy); }
+@media (max-width: 899px) {
+  .p-hero2 { display: block; min-height: 0; }
+  .p-hero2 picture { display: block; }
+  .p-hero2-img { position: static; width: 100%; height: auto; }
+  .p-hero2-text { padding-top: 8px; padding-bottom: 24px; }
+}
+.stage-img { width: 100%; height: 150px; object-fit: contain; margin: -6px 0 8px; position: relative; }
+.stage-ph { display: grid; place-items: center; height: 150px; margin: -6px 0 8px; color: var(--peach); }
+.stage-ph > svg { width: 72px; height: 72px; opacity: .8; }
+.card-illus { width: 120px; height: 120px; object-fit: contain; display: block; margin: -6px 0 8px -6px; }
+@media print { .p-hero2-img, .p-hero2 picture { display: none; } }
