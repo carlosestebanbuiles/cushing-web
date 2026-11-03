@@ -127,7 +127,7 @@ small, .small { font-size: 0.875rem; }
 .menu-btn svg { width: 22px; height: 22px; }
 .menu-btn { display: none; margin-left: auto; background: none; border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; color: var(--navy); cursor: pointer; }
 
-@media (max-width: 920px) {
+@media (max-width: 1100px) {
   .site-header .container { flex-wrap: wrap; gap: 8px 16px; padding-top: 10px; padding-bottom: 10px; }
   .menu-btn { display: inline-flex; }
   .nav { order: 4; width: 100%; flex-direction: column; display: none; margin: 0; padding-bottom: 8px; }
