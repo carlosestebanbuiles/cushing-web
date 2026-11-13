@@ -143,16 +143,11 @@ function renderFooter() {
   </footer>`;
     return;
   }
-  const slot = (es, en, name) => `<div class="logo-slot"><span>${L(es, en)}</span><strong>${name}</strong></div>`;
   el.outerHTML = `
   <footer class="site-footer">
     <div class="container">
-      <div>${L("Instituciones participantes (espacios reservados para logotipos oficiales)", "Participating institutions (placeholders for official logos)")}</div>
-      <div class="logos">
-        ${slot("Elaborado por", "Developed by", "Hospital Universitario Ramón y Cajal")}
-        ${slot("Elaborado por", "Developed by", "Hospital Pablo Tobón Uribe")}
-        ${slot("Con el aval de", "Endorsed by", L("Por confirmar", "To be confirmed"))}
-      </div>
+      <p style="margin-bottom:6px"><strong style="color:var(--navy)">${L("Responsables", "Authors")}:</strong> Dra. Marta Araujo-Castro · Dr. Carlos E. Builes-Montaño · <a href="${ROOT}acerca/#responsables">${L("ver equipo y filiaciones", "see team and affiliations")}</a></p>
+      <p class="small muted" style="margin-bottom:14px">${L("Las filiaciones son personales y no implican el aval institucional de los centros. Aval de sociedades científicas: en trámite.", "Affiliations are personal and do not imply institutional endorsement. Endorsement by scientific societies: in progress.")}</p>
       <p class="small">${L(
         "Herramienta de apoyo para profesionales de la salud. No sustituye el juicio clínico ni la valoración por un especialista. Los cálculos se realizan en su navegador: no se envía ni se guarda ningún dato.",
         "Decision-support tool for healthcare professionals. It does not replace clinical judgement or specialist assessment. Calculations run in your browser: no data is sent or stored."

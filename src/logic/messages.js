@@ -24,7 +24,7 @@ export const MESSAGES = {
     acthNoData: "Introduzca la ACTH plasmática.",
     acthIndependent: "ACTH < 10 pg/mL: orienta a hipercortisolismo ACTH-independiente (origen suprarrenal). Esta herramienta no aborda ese escenario.",
     acthIndeterminate: "ACTH entre 10 y 20 pg/mL: zona indeterminada. Repetir la medición o realizar prueba de CRH antes de concluir.",
-    acthDependent: "ACTH > 20 pg/mL: hipercortisolismo ACTH-dependiente. Continuar con el estudio del origen.",
+    acthDependent: "ACTH > 20 pg/mL: orienta a hipercortisolismo ACTH-dependiente, aunque no permite distinguir entre enfermedad de Cushing y secreción ectópica de ACTH. Continuar con el estudio del origen.",
     // Origen
     stimPositive: "Prueba de estímulo positiva (ACTH +{a} %, cortisol +{c} %): favorece origen hipofisario.",
     stimNegative: "Prueba de estímulo negativa (ACTH +{a} %, cortisol +{c} %): sin respuesta, favorece origen ectópico.",
@@ -76,9 +76,9 @@ export const MESSAGES = {
     postopNotYet: "Cortisol posoperatorio {v} (≥ 2 µg/dL = 55 nmol/L): aún no cumple el criterio de remisión. La remisión puede ser tardía; seguir hasta el nadir del cortisol. Valores que se mantienen elevados sugieren enfermedad persistente.",
     postopCaveats: "La muestra debe obtenerse sin glucocorticoides exógenos que interfieran con la medición.",
     // Bandas del modelo
-    bandLow: "Probabilidad muy baja de origen ectópico.",
-    bandIntermediate: "Zona de incertidumbre: se recomiendan pruebas de segunda línea.",
-    bandHigh: "Probabilidad alta: considerar incluir el estudio de origen ectópico en la evaluación.",
+    bandLow: "Probabilidad < 5 %: riesgo muy bajo de origen ectópico.",
+    bandIntermediate: "Probabilidad del 5 % al 25 %: incertidumbre diagnóstica; se recomiendan pruebas de segunda línea.",
+    bandHigh: "Probabilidad ≥ 25 %: probabilidad elevada que justifica ampliar el estudio de origen ectópico.",
   },
   en: {
     ufcNormal: "UFC within the normal limit ({v}×ULN).",
@@ -100,7 +100,7 @@ export const MESSAGES = {
     acthNoData: "Enter plasma ACTH.",
     acthIndependent: "ACTH < 10 pg/mL: suggests ACTH-independent (adrenal) hypercortisolism. This tool does not address that scenario.",
     acthIndeterminate: "ACTH 10–20 pg/mL: indeterminate zone. Repeat the measurement or perform a CRH test before concluding.",
-    acthDependent: "ACTH > 20 pg/mL: ACTH-dependent hypercortisolism. Proceed to localize the source.",
+    acthDependent: "ACTH > 20 pg/mL: suggests ACTH-dependent hypercortisolism, although it does not distinguish Cushing's disease from ectopic ACTH secretion. Proceed to localize the source.",
     stimPositive: "Positive stimulation test (ACTH +{a}%, cortisol +{c}%): favors a pituitary source.",
     stimNegative: "Negative stimulation test (ACTH +{a}%, cortisol +{c}%): no response, favors an ectopic source.",
     stimPartial: "Partial response to stimulation (ACTH +{a}%, cortisol +{c}%): inconclusive.",
@@ -148,9 +148,9 @@ export const MESSAGES = {
     postopRemission: "Postoperative cortisol {v} (< 2 µg/dL = 55 nmol/L): compatible with remission. Implies adrenal insufficiency: glucocorticoid replacement required.",
     postopNotYet: "Postoperative cortisol {v} (≥ 2 µg/dL = 55 nmol/L): remission criterion not yet met. Remission may be delayed; follow until the cortisol nadir. Persistently elevated values suggest persistent disease.",
     postopCaveats: "The sample must be drawn without exogenous glucocorticoids that interfere with the assay.",
-    bandLow: "Very low probability of ectopic origin.",
-    bandIntermediate: "Uncertain range: second-line testing recommended.",
-    bandHigh: "High probability: consider including the ectopic work-up in the evaluation.",
+    bandLow: "Probability < 5%: very low risk of ectopic origin.",
+    bandIntermediate: "Probability 5% to 25%: diagnostic uncertainty; second-line testing recommended.",
+    bandHigh: "Probability ≥ 25%: high probability that justifies extending the work-up for an ectopic source.",
   },
 };
 

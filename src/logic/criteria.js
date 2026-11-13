@@ -1,6 +1,7 @@
 // Puntos de corte y referencias usados por todas las herramientas.
 // Cada criterio declara su fuente y su estado de verificación.
 // status: "verified"  -> cifra comprobada en el texto de la fuente citada
+//         "team"      -> punto de corte revisado y propuesto por el equipo clínico (M. Araujo-Castro, nov 2026)
 //         "review"    -> cifra de uso habitual; requiere confirmación del equipo clínico
 //
 // Cutoffs and references used by every tool. Each criterion declares its
@@ -41,6 +42,16 @@ export const REFERENCES = {
     short: "Mulligan 2012",
     full: "Mulligan GB, Faiman C, Gupta M, et al. Prolactin measurement during inferior petrosal sinus sampling improves the localization of pituitary adenomas in Cushing's disease. Clin Endocrinol (Oxf). 2012;77(2):268-274.",
     doi: "10.1111/j.1365-2265.2012.04339.x",
+  },
+  nieman2015: {
+    short: "Nieman 2015",
+    full: "Nieman LK, Biller BMK, Findling JW, et al. Treatment of Cushing's syndrome: an Endocrine Society clinical practice guideline. J Clin Endocrinol Metab. 2015;100(8):2807-2831.",
+    doi: "10.1210/jc.2015-1818",
+  },
+  guignat2025: {
+    short: "Guignat 2025",
+    full: "Guignat L, Bertherat J. Medical treatment of Cushing's syndrome. Endocrinol Metab (Seoul). 2025;40(1):26-38.",
+    doi: "10.3803/EnM.2024.501",
   },
   rivera2026: {
     short: "Rivera-Martínez 2026",
@@ -86,12 +97,12 @@ export const CRITERIA = {
     acthRisePct: 35,
     cortisolRisePct: 20,
     refs: ["nieman1993", "fleseriu2021"],
-    status: "review", // verificado para CRH ovino; la extensión a desmopresina requiere confirmación
+    status: "team", // revisado por el equipo; criterios originales de CRH ovino (Nieman 1993)
   },
   hddst: {
     suppressionPct: 50, // supresión de cortisol > 50 % del basal favorece EC
     refs: ["fleseriu2021"],
-    status: "review",
+    status: "team",
   },
   mri: {
     macroadenomaFrom_mm: 10, // >= 10 mm con pruebas dinámicas concordantes: no requiere CSPI
@@ -136,6 +147,6 @@ export const CRITERIA = {
     low: 0.05,
     high: 0.25,
     refs: ["rivera2026"],
-    status: "review",
+    status: "team",
   },
 };
