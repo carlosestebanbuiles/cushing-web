@@ -89,7 +89,7 @@ export const CRITERIA = {
     independentBelow_pgml: 10, // < 10 pg/mL (2.2 pmol/L)
     dependentAbove_pgml: 20, // > 20 pg/mL (4.4 pmol/L); 10-20 indeterminado
     refs: ["fleseriu2021"],
-    status: "review",
+    status: "team",
   },
   // --- Origen / origin ---
   stimulation: {
