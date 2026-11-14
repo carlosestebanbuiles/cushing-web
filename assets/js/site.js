@@ -137,7 +137,7 @@ function renderFooter() {
       <p class="small">${L("Este sitio no recoge ni guarda ningún dato.", "This site does not collect or store any data.")}</p>
       <div class="footer-row">
         <span>${L("Propuesta conceptual · demo de pacientes", "Concept proposal · patient demo")}</span>
-        <nav aria-label="Pie"><a href="${ROOT}pacientes/recursos/">${L("Recursos de confianza", "Trusted resources")}</a><a href="${ROOT}pacientes/entender/#preguntas">${L("Preguntas frecuentes", "FAQ")}</a></nav>
+        <nav aria-label="Pie"><a href="${ROOT}pacientes/recursos/">${L("Recursos de confianza", "Trusted resources")}</a><a href="${ROOT}pacientes/entender/#preguntas">${L("Preguntas frecuentes", "FAQ")}</a><a href="${ROOT}pacientes/responsables/">${L("Quiénes somos", "About us")}</a></nav>
       </div>
     </div>
   </footer>`;
